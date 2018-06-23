@@ -15,42 +15,56 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
+
+<style>
+    imput, label, button {
+        margin: 5px;
+    }
+</style>
 <body>
     <div class="navbar navbar-inverse">
         <a class="navbar-brand" href="#">New York Times Search</a>
     </div>
-
-    <div class="form-group">
-        <label for="search-term">Search Term</label>
-        <input type="text" class="form-control" id="search-term">
-
-        <label for="number">Number of Records to Retrieve</label>
-        <select class="form-control" id="number">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option selected="selected">5</option>
-        </select>
-
-        <label for="start-year">Start Year (optional)</label>
-        <input type="text" class="form-control" id="start-year" value="2018">
-
-        <label for="end-year">End Year (optional)</label>
-        <input type="text" class="form-control" id="end-year" value="2018">
-
-        <button type="submit" class="btn btn-primary" id="search">Search</button>
     
+    <div class="col-md-6">
+
+            <div class="form-group">
+                    <label for="search-term">Search Term</label>
+                    <input type="text" class="form-control" id="search-term">
+            
+                    <label for="number">Number of Records to Retrieve</label>
+                    <select class="form-control" id="number">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option selected="selected">5</option>
+                    </select>
+            
+                    <label for="start-year">Start Year (optional)</label>
+                    <input type="text" class="form-control" id="start-year" value="2018">
+            
+                    <label for="end-year">End Year (optional)</label>
+                    <input type="text" class="form-control" id="end-year" value="2018">
+            
+                    <button type="submit" class="btn btn-primary" id="search">Search</button>
+                
+                </div>
+            
+                <div class="card">
+                        <div class="card-header">
+                          Top Articles
+                        </div>
+                        <div class="card-body" id="art"> 
+                        </div>
+                </div>
+
+
     </div>
 
-    <div class="card">
-            <div class="card-header">
-              Top Articles
-            </div>
-            <div class="card-body" id="art"> 
-            </div>
-    </div>
+
 </body>
+
 
 <script>
     $('#search').click(function(){
