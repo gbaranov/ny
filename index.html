@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <a class="navbar-brand" href="#">New York Times Search</a>
+    </div>
+
+    <div class="form-group">
+        <label for="search-term">Search Term</label>
+        <input type="text" class="form-control" id="search-term">
+
+        <label for="number">Number of Records to Retrieve</label>
+        <select class="form-control" id="number">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option selected="selected">5</option>
+        </select>
+
+        <label for="start-year">Start Year (optional)</label>
+        <input type="text" class="form-control" id="start-year" value="2018">
+
+        <label for="end-year">End Year (optional)</label>
+        <input type="text" class="form-control" id="end-year" value="2018">
+
+        <button type="submit" class="btn btn-primary" id="search">Search</button>
+    
+    </div>
+
+    <div class="card">
+            <div class="card-header">
+              Top Articles
+            </div>
+            <div class="card-body" id="art"> 
+            </div>
+    </div>
+</body>
+
+<script>
+    $('#search').click(function(){
+        doSearch();
+    });
+    
+
+        function doSearch() {
+
+            var search = $('#search-term').val();
+            var number = $('#number').val();
+            var startyear = $('#start-year').val() + "0101";
+            var endyear = $('#end-year').val() + "0101";
+
+
+            
+
+            var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+            url += '?' + $.param({
+                'api-key': "6286e73acf6d45e3a767eb6e568940e8",
+                'q': search,
+                //'begin_date': startyear,
+                //'end_date': endyear
+            });
+            $.ajax({
+                url: url,
+                method: 'GET',
+            }).done(function(result) {
+                $('#art').append(" ");
+                for (var i = 0; i < number; i++) {
+                    var p = $('<p>');
+                    var h3 = $('<h3>');
+                    h3.text(result.response.docs[i].headline.main);
+                    p.text(result.response.docs[i].snippet);
+                    $('#art').append(h3);
+                    $('#art').append(p);
+                }
+
+
+
+
+            }).fail(function(err) {
+                throw err;
+            });
+            
+            
+            
+            
+        }
+
+</script>
+
+</html>
