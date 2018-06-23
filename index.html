@@ -63,7 +63,8 @@
             var search = $('#search-term').val();
             var number = $('#number').val();
             var startyear = $('#start-year').val() + "0101";
-            var endyear = $('#end-year').val() + "0101";
+            var endyear = $('#end-year').val() + "1230";
+            $('#art').text(" ");
 
 
             
@@ -72,14 +73,14 @@
             url += '?' + $.param({
                 'api-key': "6286e73acf6d45e3a767eb6e568940e8",
                 'q': search,
-                //'begin_date': startyear,
-                //'end_date': endyear
+                'begin_date': startyear,
+                'end_date': endyear
             });
             $.ajax({
                 url: url,
                 method: 'GET',
             }).done(function(result) {
-                $('#art').append(" ");
+                console.log(result);
                 for (var i = 0; i < number; i++) {
                     var p = $('<p>');
                     var h3 = $('<h3>');
